@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LectorCodigoBarrasController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form action="{{path('app_leer_codigos')}}" method="post">
+    <div class="form-group row mt-5">
+        <label for="numeroIntroducido" class="col-sm-3 col-form-label">Introduce un número: </label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="numeroIntroducido">
+        </div>
+    </div>
+    <div class="col-sm-5 my-5 ps-1 border"> 
+    <p class="lead text-primary">Números a comprobar: </p>
+    <div class="form-check">
+        <label class="form-check-label" for="check1">3643</label>
+        <input class="form-check-input" type="checkbox" value="3643" id="check1" name="check1" readonly hidden>        
+    </div>
+    <div class="form-check">
+        <label class="form-check-label" for="check2">7257</label>
+        <input class="form-check-input" type="checkbox" value="7257" id="check2" name="check2" readonly hidden>       
+    </div>
+    <div class="form-check">
+        <label class="form-check-label" for="check3">1226</label>
+        <input class="form-check-input" type="checkbox" value="1226" id="check3" name="check3" readonly hidden>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label" for="check4">7341</label>
+        <input class="form-check-input" type="checkbox" value="7341" id="check4" name="check4" readonly hidden>
+    </div>
+    </div>
+    <button type="submit" class="btn btn-success">Finalizar</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $('#numeroIntroducido').on('keypress', function(e){
+                
+                var keycode = (e.keyCode ? e.keyCode : e.which);
+                if(keycode == '13'){
+                    e.preventDefault();
+                    var numeroIntroducido = $(this).val();
+                    console.log('Número introducido', numeroIntroducido);
+                    switch (numeroIntroducido) { 
+                        case $('#check1').val(): 
+                            $('#check1').prop('checked', true);
+                            $('#check1').prev().css('color', '#bc6af5');
+                            break;
+                        case $('#check2').val(): 
+                            $('#check2').prop('checked', true);
+                            $('#check2').prev().css('color', '#f78118');
+                            break;
+                        case $('#check3').val(): 
+                            $('#check3').prop('checked', true);
+                            $('#check3').prev().css('color', '#18adf7');
+                            break;		
+                        case $('#check4').val(): 
+                            $('#check4').prop('checked', true);
+                            $('#check4').prev().css('color', '#4dcb00');
+                            break;
+                        default:
+                            break;
+                    }
+                    $(this).val(''); 
+                }                                
+            });
+        });
+    </script>
+{% endblock %}
