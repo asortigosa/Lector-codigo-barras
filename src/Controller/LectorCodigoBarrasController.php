@@ -19,7 +19,8 @@ class LectorCodigoBarrasController extends AbstractController
     #[Route('/leer/codigos', name: 'app_leer_codigos')]
     public function leerCodigosBarras(): Response
     {
-        $data = $_POST;
+        //Array PHP que guarda que números de los cuatro a comprobar ha introducido el usuario
+        $numeros = $_POST;
         return $this->redirectToRoute('app_index');
     }
 }
